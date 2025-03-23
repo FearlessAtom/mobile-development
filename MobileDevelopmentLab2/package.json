@@ -1,0 +1,29 @@
+{
+  "name": "mobiledevelopmentlab2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "web": "expo start --web"
+  },
+  "dependencies": {
+    "@expo-google-fonts/abeezee": "^0.2.3",
+    "@expo/ngrok": "^4.1.3",
+    "@react-navigation/bottom-tabs": "^7.3.1",
+    "@react-navigation/material-top-tabs": "^7.2.1",
+    "expo": "~52.0.40",
+    "expo-app-loading": "^2.1.1",
+    "expo-font": "~13.0.4",
+    "expo-splash-screen": "~0.29.22",
+    "expo-status-bar": "~2.0.1",
+    "install": "^0.13.0",
+    "react": "18.3.1",
+    "react-native": "0.76.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0"
+  },
+  "private": true
+}
