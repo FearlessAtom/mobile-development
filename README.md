@@ -1,1 +1,1 @@
-[lab1](https://github.com/FearlessAtom/mobile-development/tree/lab1)
+[main branch](https://github.com/FearlessAtom/MobileLabsRN2025)
