@@ -1,9 +1,10 @@
-import { FlatList, Image, ImageBackground, ScrollView, Text, TouchableOpacity, View, VirtualizedList } from "react-native";
+import { ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../../styles";
 import { Header } from "../../components/Header";
 import { HorizontalGameList } from "../../components/HorizontalGameList";
 import { HorizontalList } from "../../components/HorizontalList";
 import { useState } from "react";
+import { useTheme } from "../../ThemeContext";
 
 const format_number = (number) =>
 {
@@ -12,6 +13,8 @@ const format_number = (number) =>
 
 export function StoreScreen()
 {
+    const { theme, toggleTheme } = useTheme();
+
     const storeImages =
     {
         "windows": require("../../assets/images/windows.png"),
@@ -126,7 +129,6 @@ export function StoreScreen()
             },
         ]
     }
-    
 
     const [verticalListData, setVerticalListData] = useState(get_data());
 
@@ -146,8 +148,7 @@ export function StoreScreen()
         }, 1000);
     }
 
-
-    return <View style={[ styles.mainBackgroundColor, { flex: 1 } ]}>
+    return <View style={{ flex: 1 }}>
         <FlatList
             ListHeaderComponent=
             {
@@ -164,6 +165,9 @@ export function StoreScreen()
             ItemSeparatorComponent={ <View style={{ height: 20 }}></View> }
             keyExtractor={item => item.id}
             contentContainerStyle={{ paddingBottom: 10 }}
+            onEndReachedThreshold={0.5}
+
+            ListFooterComponent={ loadingGames ? <ActivityIndicator size={ 40 } /> : null }
 
             onEndReached={ loadMoreGames }
 
@@ -171,8 +175,8 @@ export function StoreScreen()
             {
                 let platformLogos = item.platformLogos.map((item, index) =>
                 {
-                    return <Image key={index} style={{ height: 20, width: 20, marginRight: 10 }} resizeMode="contain"
-                        source={ storeImages[item] } />
+                    return <Image key={index} style={{ height: 20, width: 20, marginRight: 10, tintColor: theme.iconColor}}
+                        resizeMode="contain" source={ storeImages[item] } />
                 });
 
                 let platformNames = item.platformNames.map((name, index) =>
@@ -188,7 +192,7 @@ export function StoreScreen()
                     <Image resizeMode="cover" style={{ width: 100, height: 70, borderRadius: 10 }}
                         source={ storeImages[item.image] }></Image>
                     <View style={{ justifyContent: "space-evenly", marginLeft: 15 }}>
-                        <Text style={[{ color: "white", fontSize: 17 }, styles.abeeZeeFont]} >{ item.name }</Text>
+                        <Text style={[{ fontSize: 17, color: theme.textMain  }, styles.abeeZeeFont ]} >{ item.name }</Text>
                         
                         <View style={{ flexDirection: "row" }}>
                             { platformLogos }
@@ -206,7 +210,7 @@ export function StoreScreen()
 
                                             ${ item.cost }
                                         </Text>
-                                        <Text style={{ color: "white", fontSize: 16, marginLeft: 2 }}>
+                                        <Text style={{ color: theme.textMain, fontSize: 16, marginLeft: 2 }}>
                                             ${ format_number(item.cost * ( 1 - (item.discount / 100))) }
                                         </Text>
                                     </View>
@@ -219,7 +223,7 @@ export function StoreScreen()
                                 </View>
                             :
 
-                                <Text style={[styles.abeeZeeFont, { color: "white", fontSize: 15 }]}>
+                                <Text style={[styles.abeeZeeFont, { fontSize: 15, color: theme.textMain }]}>
                                     { item.cost == 0 ? "Free" : "$" + item.cost }
                                 </Text>
                             }

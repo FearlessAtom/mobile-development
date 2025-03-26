@@ -7,28 +7,14 @@ export const styles = StyleSheet.create(
         backgroundColor: "#12141c",
     },
 
-    mainBackgroundColor:
+    abeeZeeFont:
     {
-        backgroundColor: "#1c202c",
+        fontFamily: "ABeeZee_400Regular",
+
     },
 
     grayColor:
     {
-        color: "#aeacad",
-    },
-
-    abeeZeeFont:
-    {
-        fontFamily: "ABeeZee_400Regular",
-    },
-
-    buttonSecondaryColor:
-    {
-        backgroundColor: "#303649",
-    },
-
-    buttonActiveColor:
-    {
-        backgroundColor: "#31bcfc",
-    },
+        color: "#bcbaba",
+    }
 });

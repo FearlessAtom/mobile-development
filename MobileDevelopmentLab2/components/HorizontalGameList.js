@@ -1,8 +1,11 @@
 import { FlatList, Image, ImageBackground, Text, TouchableOpacity, View } from "react-native";
 import { styles } from "../styles.js";
+import { useTheme } from "../ThemeContext.js";
 
 export function HorizontalGameList({ data, images })
 {
+    const { theme, toggleTheme } = useTheme();
+
     return <FlatList
         data={ data }
         contentContainerStyle={{ paddingVertical: 15, paddingHorizontal: 20 }}
