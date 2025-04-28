@@ -166,10 +166,11 @@ export default function App()
         <FlatList
             data={ tasks }
             renderItem={( { item } ) =>
-                <View style={ styles.taskItem }>
-                    <Text style={ styles.taskText }>{ item.heading }</Text>
-                    <TouchableOpacity onPress={ () => remove_task(item.id) } style={ styles.removeButton }>
-                        <Text style={ styles.removeButtonText }>Remove</Text>
+                <View style={styles.taskItem}>
+                    <Text style={styles.taskText}>{item.heading}</Text>
+                    <Text style={styles.dateText}>{new Date(item.date).toLocaleString()}</Text>
+                    <TouchableOpacity onPress={() => remove_task(item.id)} style={styles.removeButton}>
+                        <Text style={styles.removeButtonText}>Remove</Text>
                     </TouchableOpacity>
                 </View>
             }
