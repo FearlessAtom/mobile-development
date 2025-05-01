@@ -5,7 +5,40 @@ import { NavigationContainer, useNavigation } from "@react-navigation/native"
 import { useEffect, useState } from "react";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import { StatusBar } from "react-native";
+import Dialog from "react-native-dialog"
 
+const PromptButton = ( { initialValue, onDone, onCancel, button } ) =>
+{
+    const [isPromptVisible, setIsPromptVisible] = useState(false);
+    const [inputValue, setInputValue] = useState(initialValue);
+
+    return <View>
+        <TouchableOpacity onPress={ () => setIsPromptVisible(true) }
+            style={ directoryStyles.directoryPanelButton }
+        >
+            { button }
+        </TouchableOpacity>
+
+        <Dialog.Container visible={ isPromptVisible } >
+            <Dialog.Input onChangeText={ setInputValue } selectTextOnFocus={ true } autoFocus={ true } style={{ fontSize: 18 }}
+                value={ inputValue } />
+            <Dialog.Button label="Cancel" onPress={
+                () =>
+                {
+                    if(onCancel) onCancel();
+                    setIsPromptVisible(false);
+                }
+            } />
+            <Dialog.Button label="Done" onPress={
+                () => 
+                {
+                    if (onDone) onDone(inputValue);
+                    setIsPromptVisible(false);
+                }
+            } />
+        </Dialog.Container>
+    </View>
+}
 
 const root_path = FileSystem.documentDirectory + "AppData/";
 
@@ -69,6 +102,7 @@ const fileStyles = StyleSheet.create(
         display: "flex",
         alignItems: "center"
     },
+
     fileNameText:
     {
         fontSize: 20,
@@ -81,29 +115,60 @@ function DirectoryScreen({ route })
 
     const [files, setFiles] = useState([]);
 
+    const reload_files = async() => setFiles(await FileSystem.readDirectoryAsync(path));
+
     useEffect(() =>
     {
         (async() =>
         {
-            setFiles(await FileSystem.readDirectoryAsync(path));
+            await reload_files();
         })();
     }, []);
 
     const parts = path.split("/").filter(Boolean);
     const directory_name = parts[parts.length - 1];
 
-    return <View>
+    return <View style={{ flex: 1 }}>
         <View style={ directoryStyles.directoryPanel }>
             <Text style={ directoryStyles.directoryNameText }>{ directory_name }</Text>
 
             <View style={ directoryStyles.directoryPanelButtons }>
-                <TouchableOpacity style={ directoryStyles.directoryPanelButton }>
-                    <AntDesign size={ 30 } name="addfolder" />
-                </TouchableOpacity>
+                <PromptButton initialValue="New Directory"
+                    onDone={
+                        directory_name =>
+                        {
+                            (async() =>
+                            {
+                                const new_directory_path = path + directory_name;
+                                await FileSystem.makeDirectoryAsync(new_directory_path);
+                                await reload_files();
+                            })();
+                        }
+                    }
+                    button=
+                    { 
+                        <AntDesign size={ 30 } name="addfolder" />
+                    }
+                />
 
-                <TouchableOpacity style={ directoryStyles.directoryPanelButton }>
-                    <AntDesign size={ 30 } name="addfile" />
-                </TouchableOpacity>
+                <PromptButton initialValue="New File"
+                    onDone=
+                    {
+                        file_name =>
+                        {
+                            (async() =>
+                            {
+                                const new_file_path = path + file_name;
+                                await FileSystem.writeAsStringAsync(new_file_path, "");
+                                await reload_files();
+                            })();
+                        }
+                    }
+                    button=
+                    { 
+                        <AntDesign size={ 30 } name="addfile" />
+                    }
+                />
             </View>
         </View>
 
