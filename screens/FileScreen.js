@@ -15,7 +15,7 @@ export default function FileScreen({ route })
 
     useEffect(() => 
     {
-        (async() => 
+        (async() =>
         {
             setFileContents(await FileSystem.readAsStringAsync(path));
         })();
@@ -23,11 +23,7 @@ export default function FileScreen({ route })
 
     const save = async() => 
     {
-        console.log("Atom");
-
         await FileSystem.writeAsStringAsync(path, fileContents);
-
-        console.log("Atom2");
     }
 
     const info = async() => 
