@@ -46,7 +46,7 @@ export default function FileItem({ path, file_name })
 
         else
         {
-            Alert.alert("Atom");
+            navigation.push("File", { path: path + file_name });
         }
     }
 

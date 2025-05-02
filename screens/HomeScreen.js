@@ -4,22 +4,9 @@ import { Text, TouchableOpacity } from "react-native";
 import { View } from "react-native";
 import { StyleSheet } from "react-native";
 import *  as FileSystem from "expo-file-system";
+import { format_bytes } from "../App";
 
 const root_path = FileSystem.documentDirectory + "AppData/";
-
-const format_bytes = (bytes, decimals = 2) =>
-{
-    if (bytes === 0) return '0 Bytes';
-
-    const k = 1024;
-    const dm = decimals < 0 ? 0 : decimals;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB'];
-
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    const size = parseFloat((bytes / Math.pow(k, i)).toFixed(dm));
-
-    return `${size} ${sizes[i]}`;
-}
 
 const format_percentage = (value, decimals = 2) =>
 {

@@ -7,7 +7,6 @@ import ConfirmationButton from "../components/ConfirmationButton.js";
 import PromptButton from "../components/PromptButton.js";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import Feather from "react-native-vector-icons/Feather";
-import AntDesign from "react-native-vector-icons/AntDesign";
 import { FlatList } from "react-native";
 import * as FileSystem from "expo-file-system";
 import FileItem from "../components/FileItem";
@@ -97,7 +96,7 @@ export default function DirectoryScreen({ route })
                     }
                     button=
                     { 
-                        <AntDesign size={ 30 } name="addfile" />
+                        <Feather size={ 30 } name="file-plus" />
                     }
                 />
             </View>
@@ -116,6 +115,7 @@ const directoryStyles = StyleSheet.create(
     {
         flexDirection: "row",
         alignItems: "center",
+        backgroundColor: "lightgray",
     },
     
     directoryPanelButtons:
