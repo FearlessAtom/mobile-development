@@ -5,6 +5,9 @@ import { StatusBar } from "react-native";
 import HomeScreen from "./screens/HomeScreen.js";
 import DirectoryScreen from "./screens/DirectoryScreen.js";
 import FileScreen from "./screens/FileScreen.js"
+import * as FileSystem from "expo-file-system";
+
+export const root_path = FileSystem.documentDirectory + "AppData/";
 
 const Stack = createNativeStackNavigator();
 

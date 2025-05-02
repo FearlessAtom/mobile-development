@@ -6,8 +6,6 @@ import { StyleSheet } from "react-native";
 import *  as FileSystem from "expo-file-system";
 import { format_bytes } from "../App";
 
-const root_path = FileSystem.documentDirectory + "AppData/";
-
 const format_percentage = (value, decimals = 2) =>
 {
     if (typeof value !== 'number') return 'NaN%';

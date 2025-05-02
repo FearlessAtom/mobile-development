@@ -10,6 +10,7 @@ import Feather from "react-native-vector-icons/Feather";
 import { FlatList } from "react-native";
 import * as FileSystem from "expo-file-system";
 import FileItem from "../components/FileItem";
+import { get_file_name, root_path } from "../App.js";
 
 export default function DirectoryScreen({ route })
 {
@@ -30,8 +31,7 @@ export default function DirectoryScreen({ route })
         }, [])
     );
 
-    const parts = path.split("/").filter(Boolean);
-    const directory_name = parts[parts.length - 1];
+    const directory_name = get_file_name(path);
 
     return <View style={{ flex: 1 }}>
         <View style={ directoryStyles.directoryPanel }>
@@ -42,24 +42,31 @@ export default function DirectoryScreen({ route })
                     <MaterialCommunityIcons size={35} name="reload"/>
                 </TouchableOpacity>
 
-                <ConfirmationButton
-                    message={`Are you sure you want to delete the directory "${directory_name}"`}
-                    button={
-                        <Feather size={35} name="folder-minus" />
-                    }
-                    onYes=
-                    {
-                        () =>
-                        {
-                            (async() =>
+                { 
+                    path == root_path
+                    ?
+                        null
+                    :
+                        <ConfirmationButton
+                            message={`Are you sure you want to delete the directory "${directory_name}"`}
+                            button={
+                                <Feather size={35} name="folder-minus" />
+                            }
+                            onYes=
+                            {
+                                () =>
                                 {
-                                    await FileSystem.deleteAsync(path);
-                                    navigation.goBack();
+                                    (async() =>
+                                        {
+                                            await FileSystem.deleteAsync(path);
+                                            navigation.goBack();
+                                        }
+                                    )();
                                 }
-                            )();
-                        }
-                    }
-                />
+                            }
+                            
+                        />
+                }
 
                 <PromptButton initialValue="New Directory"
                     message="Enter the new directory's name"

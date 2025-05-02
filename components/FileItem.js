@@ -1,6 +1,5 @@
 import { useNavigation } from "@react-navigation/native";
 import { useEffect, useState } from "react";
-import { Alert } from "react-native";
 import { Image, StyleSheet, Text, TouchableOpacity } from "react-native";
 import * as FileSystem from "expo-file-system";
 
