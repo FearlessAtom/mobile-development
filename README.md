@@ -3,3 +3,4 @@
 - ## [lab3](https://github.com/FearlessAtom/mobile-development/tree/lab3)
 - ## [lab4](https://github.com/FearlessAtom/mobile-development/tree/lab4)
 - ## [lab5](https://github.com/FearlessAtom/mobile-development/tree/lab5)
+- ## [lab6](https://github.com/FearlessAtom/mobile-development/tree/lab6)
