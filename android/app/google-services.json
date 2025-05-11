@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "123197694356",
+    "project_id": "semenchyklab6-6299b",
+    "storage_bucket": "semenchyklab6-6299b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:123197694356:android:82aa3b7cda37515468ef81",
+        "android_client_info": {
+          "package_name": "Semenchyk.Lab6"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuYQNBOBvi-gkPYFGDSXc2I3-o4mDN2Pc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

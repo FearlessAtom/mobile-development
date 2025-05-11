@@ -23,11 +23,7 @@ export default function RegisterScreen({ navigation })
             return;
         }
 
-        console.log("Atom");
-
         const result = await createUserWithEmailAndPassword(authentication, email, password).catch(error => console.log(error));
-
-        console.log("Atom2");
 
         navigation.replace("Login");
     };

@@ -14,17 +14,24 @@
             "backgroundColor": "#ffffff"
         },
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "com.fearlessatom.lab6"
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
                 "backgroundColor": "#ffffff"
             },
-            "edgeToEdgeEnabled": true
+            "edgeToEdgeEnabled": true,
+            "package": "com.fearlessatom.lab6"
         },
         "web": {
             "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "be0dde1d-dfa6-4b85-a640-c8484e78916d"
+            }
         }
     }
 }
