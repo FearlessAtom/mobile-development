@@ -1,9 +1,7 @@
 import { authentication } from "../firebase/config.js";
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { useAuth } from "../contexts/AuthContext.js";
-
+import { signInWithEmailAndPassword } from "firebase/auth"; import { useAuth } from "../contexts/AuthContext.js";
 export default function LoginScreen({ navigation })
 {
     const [email, setEmail] = useState('');
@@ -21,7 +19,7 @@ export default function LoginScreen({ navigation })
 
         await signInWithEmailAndPassword(authentication, email, password)
             .then(result => setLoggedInUser(result.user))
-            .catch(error => console.log(error));
+            .catch(error => Alert.alert(error.message));
     };
 
     return <View style={styles.container}>
@@ -54,6 +52,12 @@ export default function LoginScreen({ navigation })
             <Text style={styles.footerText}>Don't have an account yet?</Text>
             <TouchableOpacity onPress={() => navigation.replace("Register")}>
                 <Text style={styles.loginLink}>Register</Text>
+            </TouchableOpacity>
+        </View>
+        <View style={styles.footer}>
+            <Text style={styles.footerText}>Forgot your password?</Text>
+            <TouchableOpacity onPress={() => navigation.push("ResetPassword")}>
+                <Text style={styles.loginLink}>Reset Password</Text>
             </TouchableOpacity>
         </View>
     </View>

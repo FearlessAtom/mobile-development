@@ -2,19 +2,25 @@ import React, { useEffect, useState } from "react";
 import { Text, View, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { authentication, firestore } from "../firebase/config.js";
 import { doc, getDoc, setDoc } from "@firebase/firestore";
+import ConfirmationButton from "../components/ConfirmationButton.js";
+import { signOut } from "@firebase/auth";
+import { useAuth } from "../contexts/AuthContext.js";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ProfileScreen()
 {
     const user = authentication.currentUser;
+    const { setLoggedInUser } = useAuth();
+    const navigation = useNavigation();
 
+    const [emailAddress, setEmailAddress] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [dateOfBirth, setDateOfBirth] = useState("");
-    const [emailAddress, setEmailAddress] = useState("");
 
     const document = doc(firestore, "users", user.uid);
 
-    useEffect(() => 
+    useEffect(() =>
     {
         (async() =>
         {
@@ -26,6 +32,18 @@ export default function ProfileScreen()
             setEmailAddress(user.email);
         })();
     }, []);
+
+    const logout = async() =>
+    {
+        await signOut(authentication).
+            then(() => setLoggedInUser(null)).
+            catch(error => console.log(error));
+    }
+
+    const delete_account = () =>
+    {
+        navigation.push("DeleteAccount");
+    }
 
     const save_profile = async() =>
     {
@@ -56,7 +74,7 @@ export default function ProfileScreen()
     };
 
     return <View style={styles.container}>
-        <Text style={styles.label}>First Name</Text>
+        <Text style={styles.label}>Email Address</Text>
         <TextInput
             style={[ styles.muted, styles.input ]}
             value={ emailAddress }
@@ -89,6 +107,22 @@ export default function ProfileScreen()
         />
 
         <Button title="Save Profile" onPress={ save_profile } />
+
+        <View style={{ height: 16 }}></View>
+
+        <ConfirmationButton
+            onYes={ logout }
+            message="Are you sure you want to log out?"
+            button_title="Log out"
+        />
+
+        <View style={{ height: 16 }}></View>
+
+        <Button
+            onPress={ delete_account }
+            title="Delete account"
+            color="red"
+        />
     </View>
 }
 

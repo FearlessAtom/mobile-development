@@ -23,9 +23,9 @@ export default function RegisterScreen({ navigation })
             return;
         }
 
-        const result = await createUserWithEmailAndPassword(authentication, email, password).catch(error => console.log(error));
-
-        navigation.replace("Login");
+        await createUserWithEmailAndPassword(authentication, email, password).
+            then(() => navigation.replace("Login")).
+            catch(error => Alert.alert(error.message));
     };
 
     return <View style={styles.container}>

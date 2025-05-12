@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply plugin: 'com.google.gms.google-services'
 
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
@@ -91,7 +92,7 @@ android {
 
     namespace 'com.fearlessatom.lab6'
     defaultConfig {
-        applicationId 'com.fearlessatom.lab6'
+        applicationId 'Semenchyk.Lab6'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
